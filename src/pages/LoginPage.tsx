@@ -9,4 +9,6 @@ function LoginPage() {
   )
 }
 
+const broken: number = 'не число'
+
 export default LoginPage
