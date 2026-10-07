@@ -26,6 +26,8 @@ npm run dev
 | `npm run typecheck`    | проверка типов TypeScript             |
 | `npm run format`       | форматирование кода Prettier          |
 | `npm run format:check` | проверка форматирования без изменений |
+| `npm test`             | тесты (Vitest), один прогон           |
+| `npm run test:watch`   | тесты в режиме наблюдения             |
 
 ## Структура
 
