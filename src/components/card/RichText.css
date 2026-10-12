@@ -1,0 +1,20 @@
+.rich-text__card-ref {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Кнопка, которая выглядит как ссылка: доступна с клавиатуры и для экранных дикторов */
+.rich-text__card-ref--link {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: #1668dc;
+  text-decoration: underline dotted;
+  cursor: pointer;
+}
+
+.rich-text__card-ref--link:hover {
+  text-decoration-style: solid;
+}
