@@ -4,6 +4,8 @@
 import '@testing-library/jest-dom/vitest'
 import { afterEach } from 'vitest'
 import { cleanup } from '@testing-library/react'
+// Переводы: компоненты в тестах показывают те же русские строки, что и в приложении
+import '../i18n/index.ts'
 
 // Убираем отрисованные компоненты после каждого теста
 afterEach(() => {
