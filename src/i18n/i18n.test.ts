@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import i18n, { resources } from './index.ts'
 
-/** Все пары «ключ — строка» из вложенного объекта переводов: { 'nav.login': 'Вход', ... }. */
+/** Все пары «ключ — строка» из вложенного объекта переводов: { 'login.title': 'Вход', ... }. */
 function flatten(tree: object, prefix = ''): Record<string, unknown> {
   return Object.entries(tree).reduce<Record<string, unknown>>((result, [key, value]) => {
     const path = prefix ? `${prefix}.${key}` : key
@@ -14,7 +14,7 @@ function flatten(tree: object, prefix = ''): Record<string, unknown> {
 describe('i18n', () => {
   it('по умолчанию интерфейс на русском', () => {
     expect(i18n.language).toBe('ru')
-    expect(i18n.t('nav.login')).toBe('Вход')
+    expect(i18n.t('login.title')).toBe('Вход')
   })
 
   it('подставляет параметры в строку', () => {
