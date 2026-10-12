@@ -1,0 +1,17 @@
+/* Окно просмотра без собственной рамки: видна только карта.
+   .ant-modal-content — имя блока в Ant Design 5, .ant-modal-container — в Ant Design 6. */
+.card-preview .ant-modal-content,
+.card-preview .ant-modal-container {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* В просмотре карта не «приподнимается» при наведении: она и так открыта */
+.card-preview .game-card--clickable:hover .game-card__face {
+  transform: none;
+}
+
+.card-preview .game-card--clickable {
+  cursor: zoom-out;
+}

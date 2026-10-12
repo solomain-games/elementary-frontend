@@ -1,0 +1,119 @@
+/*
+ * Карта задаёт «контейнер» (container-type), и всё внутри меряется в cqi —
+ * процентах от ширины карты: 6cqi у карты шириной 200px — это 12px, у карты 400px — 24px.
+ * Так текст и отступы масштабируются вместе с картой, как на напечатанной карте.
+ */
+.game-card {
+  container-type: inline-size;
+  flex: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.game-card__face {
+  position: relative;
+  aspect-ratio: 5 / 7; /* пропорции изображений карт: 600 × 840 */
+  overflow: hidden;
+  border-radius: 8px;
+  background: #e8e2d6;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.2),
+    0 4px 12px rgb(0 0 0 / 0.12);
+  user-select: none;
+}
+
+.game-card--clickable {
+  cursor: pointer;
+}
+
+.game-card--clickable .game-card__face {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.game-card--clickable:hover .game-card__face {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 0.2),
+    0 10px 24px rgb(0 0 0 / 0.18);
+}
+
+.game-card--clickable:focus-visible .game-card__face {
+  box-shadow: 0 0 0 3px #1668dc;
+}
+
+/* Карта-картинка */
+
+.game-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-card__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 4cqi 6cqi;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.55));
+  color: #fff;
+  font-size: max(9px, 6cqi);
+  line-height: 1.3;
+}
+
+/* Текстовая карта */
+
+.game-card__text-face {
+  height: 100%;
+  background-color: #f3ecdd; /* пока фон не загрузился */
+  background-size: cover;
+  background-position: center;
+}
+
+.game-card__text {
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: auto; /* слишком длинный текст можно прокрутить, а не потерять */
+  padding: 14cqi 10cqi 10cqi;
+  color: #2b2118;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: max(8px, 6.5cqi);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.game-card__text--left {
+  text-align: left;
+}
+
+.game-card__text--center {
+  text-align: center;
+}
+
+.game-card__text--right {
+  text-align: right;
+}
+
+.game-card__text--justify {
+  text-align: justify;
+  hyphens: auto; /* переносы по слогам: без них при выключке по ширине появляются дыры */
+}
+
+/* Номер карты */
+
+.game-card__number {
+  position: absolute;
+  top: 3cqi;
+  left: 3cqi;
+  min-width: 10cqi;
+  padding: 1cqi 2.5cqi;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.9);
+  color: #2b2118;
+  font-size: max(9px, 6cqi);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+}

@@ -15,6 +15,10 @@ function AppLayout() {
     { key: '/', label: <Link to="/">{t('nav.login')}</Link> },
     { key: '/room/DEMO', label: <Link to="/room/DEMO">{t('nav.room')}</Link> },
     { key: '/game/DEMO', label: <Link to="/game/DEMO">{t('nav.game')}</Link> },
+    // Страница для разработки, только в dev-режиме
+    ...(import.meta.env.DEV
+      ? [{ key: '/dev/cards', label: <Link to="/dev/cards">{t('nav.cards')}</Link> }]
+      : []),
   ]
 
   return (
