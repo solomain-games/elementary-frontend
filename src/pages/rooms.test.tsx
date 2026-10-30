@@ -96,13 +96,14 @@ describe('создание комнаты', () => {
     signIn('Анна')
   })
 
-  it('главная ведёт к созданию комнаты', () => {
+  it('главная ведёт к созданию комнаты', async () => {
     routeFetch({ 'GET /api/game/cases': () => jsonResponse([DEMO]) })
     renderAt('/')
 
     fireEvent.click(screen.getByRole('button', { name: 'Создать комнату' }))
 
-    expect(screen.getByRole('heading', { name: 'Новая комната' })).toBeInTheDocument()
+    // Страница сначала загружает список дел, заголовок появляется после ответа
+    expect(await screen.findByRole('heading', { name: 'Новая комната' })).toBeInTheDocument()
   })
 
   it('дело → настройки → POST → комната', async () => {

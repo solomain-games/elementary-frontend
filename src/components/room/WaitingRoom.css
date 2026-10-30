@@ -1,0 +1,19 @@
+.waiting-room__members {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+}
+
+.waiting-room__member {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.waiting-room__member + .waiting-room__member {
+  border-top: 1px solid #f0f0f0;
+}

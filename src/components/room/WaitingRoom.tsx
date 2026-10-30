@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   Flex,
-  List,
   Popconfirm,
   Space,
   Tag,
@@ -16,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { errorMessageKey } from '../../api/errorMessages.ts'
 import { kickPlayer, startGame } from '../../api/rooms.ts'
 import type { RoomSnapshot } from '../../game/protocol.ts'
+import './WaitingRoom.css'
 
 interface WaitingRoomProps {
   room: RoomSnapshot
@@ -98,29 +98,10 @@ function WaitingRoom({ room, caseTitle, playerId, onLeave }: WaitingRoomProps) {
           </Tag>
         </Flex>
 
-        <List
-          bordered
-          dataSource={room.members}
-          renderItem={(member) => (
-            <List.Item
-              actions={
-                isHost && member.id !== playerId
-                  ? [
-                      <Popconfirm
-                        key="kick"
-                        title={t('room.kickConfirm', { name: member.name })}
-                        okText={t('room.kick')}
-                        cancelText={t('common.cancel')}
-                        onConfirm={() => run(() => kickPlayer(room.code, member.id))}
-                      >
-                        <Button size="small" danger disabled={busy}>
-                          {t('room.kick')}
-                        </Button>
-                      </Popconfirm>,
-                    ]
-                  : []
-              }
-            >
+        {/* Обычный список ul/li: List из Ant Design устарел (в 6.6 его заменяет Listy) */}
+        <ul className="waiting-room__members">
+          {room.members.map((member) => (
+            <li key={member.id} className="waiting-room__member">
               <Space>
                 <Badge
                   dot
@@ -133,9 +114,21 @@ function WaitingRoom({ room, caseTitle, playerId, onLeave }: WaitingRoomProps) {
                 {member.id === room.hostId && <Tag color="gold">{t('room.host')}</Tag>}
                 {member.id === playerId && <Tag>{t('room.you')}</Tag>}
               </Space>
-            </List.Item>
-          )}
-        />
+              {isHost && member.id !== playerId && (
+                <Popconfirm
+                  title={t('room.kickConfirm', { name: member.name })}
+                  okText={t('room.kick')}
+                  cancelText={t('common.cancel')}
+                  onConfirm={() => run(() => kickPlayer(room.code, member.id))}
+                >
+                  <Button size="small" danger disabled={busy}>
+                    {t('room.kick')}
+                  </Button>
+                </Popconfirm>
+              )}
+            </li>
+          ))}
+        </ul>
 
         <Flex justify="space-between" align="center" wrap gap={12}>
           {isHost ? (
