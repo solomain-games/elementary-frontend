@@ -11,13 +11,10 @@ function AppLayout() {
   const { t } = useTranslation()
   const { session, logout } = useAuth()
 
-  // Временное меню для переходов между заглушками; уберём, когда появятся настоящие сценарии.
   // Пункты собираются внутри компонента: t() должна вызываться при отрисовке, чтобы при смене
   // языка надписи обновились.
   const menuItems = [
     { key: '/', label: <Link to="/">{t('nav.home')}</Link> },
-    { key: '/room/DEMO', label: <Link to="/room/DEMO">{t('nav.room')}</Link> },
-    { key: '/game/DEMO', label: <Link to="/game/DEMO">{t('nav.game')}</Link> },
     // Страница для разработки, только в dev-режиме
     ...(import.meta.env.DEV
       ? [{ key: '/dev/cards', label: <Link to="/dev/cards">{t('nav.cards')}</Link> }]

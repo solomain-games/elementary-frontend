@@ -51,6 +51,11 @@ function serveCaseMedia(casesDir: string): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), serveCaseMedia(process.env.CASES_DIR ?? '../cases/cases')],
+  // Версия из package.json: npm передаёт её в переменной окружения при запуске скриптов.
+  // Клиент отправляет её серверу при подключении (протокол, 5.1: X-Client-Version)
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? '0.0.0'),
+  },
   server: {
     port: 5173,
     // В разработке браузер обращается только к Vite (:5173),
