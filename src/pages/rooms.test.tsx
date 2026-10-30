@@ -201,7 +201,9 @@ describe('зал ожидания', () => {
 
     // Кнопка в списке открывает подтверждение; в нём своя кнопка «Исключить»
     fireEvent.click(screen.getByRole('button', { name: 'Исключить' }))
-    await waitFor(() => expect(screen.getAllByRole('button', { name: 'Исключить' })).toHaveLength(2))
+    await waitFor(() =>
+      expect(screen.getAllByRole('button', { name: 'Исключить' })).toHaveLength(2),
+    )
     fireEvent.click(screen.getAllByRole('button', { name: 'Исключить' })[1])
 
     await waitFor(() =>

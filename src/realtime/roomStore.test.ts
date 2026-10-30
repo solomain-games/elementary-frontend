@@ -2,7 +2,11 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import type { Snapshot } from '../game/protocol.ts'
 import { useRoomStore } from './roomStore.ts'
 
-function snapshot(version: number, code = 'K7Q2PX', serverTime = '2026-10-30T12:00:10.000Z'): Snapshot {
+function snapshot(
+  version: number,
+  code = 'K7Q2PX',
+  serverTime = '2026-10-30T12:00:10.000Z',
+): Snapshot {
   return {
     protocolVersion: 1,
     version,
@@ -55,6 +59,11 @@ describe('roomStore', () => {
 
     store().enter('ABCDEF')
 
-    expect(store()).toMatchObject({ code: 'ABCDEF', snapshot: null, kicked: false, connection: 'idle' })
+    expect(store()).toMatchObject({
+      code: 'ABCDEF',
+      snapshot: null,
+      kicked: false,
+      connection: 'idle',
+    })
   })
 })

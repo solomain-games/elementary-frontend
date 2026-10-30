@@ -53,7 +53,8 @@ export function useRoomConnection(code: string | null) {
   }, [code, playerId, logout])
 
   const send = useCallback(
-    (command: CommandName, body?: Record<string, unknown>) => connection.current?.send(command, body),
+    (command: CommandName, body?: Record<string, unknown>) =>
+      connection.current?.send(command, body),
     [],
   )
 

@@ -113,7 +113,10 @@ describe('connectToRoom', () => {
 
     client.deliver('/user/queue/state', '{"version":7}')
     client.deliver('/topic/room.K7Q2PX', '{"type":"GAME_STARTED"}')
-    client.deliver('/user/queue/errors', '{"requestId":"r1","command":"play","code":"NOT_YOUR_TURN"}')
+    client.deliver(
+      '/user/queue/errors',
+      '{"requestId":"r1","command":"play","code":"NOT_YOUR_TURN"}',
+    )
 
     expect(options.onSnapshot).toHaveBeenCalledWith({ version: 7 })
     expect(options.onEvent).toHaveBeenCalledWith({ type: 'GAME_STARTED' })

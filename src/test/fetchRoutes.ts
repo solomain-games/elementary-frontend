@@ -9,7 +9,9 @@ type Route = (init: RequestInit | undefined) => Response | Promise<Response>
 export function routeFetch(routes: Record<string, Route>) {
   const fetchMock = vi.fn((url: string, init?: RequestInit) => {
     const route = routes[`${init?.method ?? 'GET'} ${url}`]
-    return Promise.resolve(route ? route(init) : new Response('{"code":"TEST_NO_ROUTE"}', { status: 404 }))
+    return Promise.resolve(
+      route ? route(init) : new Response('{"code":"TEST_NO_ROUTE"}', { status: 404 }),
+    )
   })
   vi.stubGlobal('fetch', fetchMock)
   return fetchMock
@@ -17,7 +19,9 @@ export function routeFetch(routes: Record<string, Route>) {
 
 /** Был ли запрос «МЕТОД путь»; возвращает тело последнего такого запроса. */
 export function requestBody(fetchMock: ReturnType<typeof routeFetch>, method: string, url: string) {
-  const call = fetchMock.mock.calls.filter(([u, init]) => u === url && (init?.method ?? 'GET') === method).at(-1)
+  const call = fetchMock.mock.calls
+    .filter(([u, init]) => u === url && (init?.method ?? 'GET') === method)
+    .at(-1)
   if (!call) return undefined
   const body = call[1]?.body
   return typeof body === 'string' ? JSON.parse(body) : null

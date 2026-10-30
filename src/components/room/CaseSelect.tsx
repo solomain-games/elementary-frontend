@@ -29,8 +29,12 @@ function CaseSelect({ cases, value, onChange }: CaseSelectProps) {
             aria-checked={selected}
             aria-label={title}
             tabIndex={0}
-            className={selected ? 'case-select__card case-select__card--selected' : 'case-select__card'}
-            cover={<img alt="" src={caseAssetUrl(item.id, item.cover)} className="case-select__cover" />}
+            className={
+              selected ? 'case-select__card case-select__card--selected' : 'case-select__card'
+            }
+            cover={
+              <img alt="" src={caseAssetUrl(item.id, item.cover)} className="case-select__cover" />
+            }
             onClick={() => onChange?.(item.id)}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {

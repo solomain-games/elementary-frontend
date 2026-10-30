@@ -1,4 +1,15 @@
-import { Alert, Button, Card, Form, InputNumber, Result, Segmented, Select, Spin, Typography } from 'antd'
+import {
+  Alert,
+  Button,
+  Card,
+  Form,
+  InputNumber,
+  Result,
+  Segmented,
+  Select,
+  Spin,
+  Typography,
+} from 'antd'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
@@ -37,7 +48,8 @@ function CreateRoomPage() {
     let cancelled = false // ответ пришёл, когда страницу уже закрыли, — игнорируем
     fetchCases().then(
       (cases) => !cancelled && setCasesState({ status: 'ready', cases }),
-      (e: unknown) => !cancelled && setCasesState({ status: 'error', messageKey: errorMessageKey(e) }),
+      (e: unknown) =>
+        !cancelled && setCasesState({ status: 'error', messageKey: errorMessageKey(e) }),
     )
     return () => {
       cancelled = true

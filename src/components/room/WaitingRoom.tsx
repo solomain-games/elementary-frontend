@@ -1,4 +1,16 @@
-import { Avatar, Badge, Button, Card, Flex, List, Popconfirm, Space, Tag, Typography, message } from 'antd'
+import {
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  Flex,
+  List,
+  Popconfirm,
+  Space,
+  Tag,
+  Typography,
+  message,
+} from 'antd'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { errorMessageKey } from '../../api/errorMessages.ts'
@@ -57,13 +69,21 @@ function WaitingRoom({ room, caseTitle, playerId, onLeave }: WaitingRoomProps) {
       <Flex vertical gap={16}>
         <div>
           <Typography.Text type="secondary">{t('room.codeLabel')}</Typography.Text>
-          <Typography.Title level={3} copyable={{ text: room.code }} style={{ margin: 0, letterSpacing: 4 }}>
+          <Typography.Title
+            level={3}
+            copyable={{ text: room.code }}
+            style={{ margin: 0, letterSpacing: 4 }}
+          >
             {room.code}
           </Typography.Title>
         </div>
 
         <Space.Compact style={{ width: '100%' }}>
-          <Typography.Text code style={{ flex: 1, padding: '4px 8px', overflow: 'hidden' }} ellipsis>
+          <Typography.Text
+            code
+            style={{ flex: 1, padding: '4px 8px', overflow: 'hidden' }}
+            ellipsis
+          >
             {inviteLink}
           </Typography.Text>
           <Button onClick={copyLink}>{t('room.copyLink')}</Button>
