@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router'
 import AuthProvider from './auth/AuthProvider.tsx'
 import RequireAuth from './auth/RequireAuth.tsx'
 import CardsDemoPage from './dev/CardsDemoPage.tsx'
+import CreateRoomPage from './pages/CreateRoomPage.tsx'
 import AppLayout from './layout/AppLayout.tsx'
 import GamePage from './pages/GamePage.tsx'
 import HomePage from './pages/HomePage.tsx'
@@ -18,6 +19,7 @@ function App() {
           {/* Всё внутри — только после входа */}
           <Route element={<RequireAuth />}>
             <Route index element={<HomePage />} />
+            <Route path="rooms/new" element={<CreateRoomPage />} />
             <Route path="room/:code" element={<RoomPage />} />
             <Route path="game/:code" element={<GamePage />} />
           </Route>

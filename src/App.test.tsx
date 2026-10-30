@@ -5,6 +5,11 @@ import App from './App.tsx'
 import { SESSION_STORAGE_KEY } from './auth/session.ts'
 import { jsonResponse, signIn, testSession } from './test/session.ts'
 
+// WebSocket в этих тестах не нужен: комната только открывается
+vi.mock('./realtime/gameClient.ts', () => ({
+  connectToRoom: () => ({ send: vi.fn(), disconnect: vi.fn() }),
+}))
+
 // MemoryRouter хранит адрес в памяти, а не в строке браузера: удобно задавать стартовую страницу в тестах
 function renderAt(path: string) {
   return render(
@@ -31,10 +36,11 @@ describe('маршруты', () => {
     expect(screen.getByRole('heading', { name: 'Здравствуйте, Анна!' })).toBeInTheDocument()
   })
 
-  it('показывает код комнаты из адреса', () => {
+  it('на главной — создать комнату или войти по коду', () => {
     signIn()
-    renderAt('/room/ABC123')
-    expect(screen.getByRole('heading', { name: 'Комната ABC123' })).toBeInTheDocument()
+    renderAt('/')
+    expect(screen.getByRole('button', { name: 'Создать комнату' })).toBeInTheDocument()
+    expect(screen.getByLabelText('Код комнаты')).toBeInTheDocument()
   })
 
   it('на неизвестном адресе показывает 404', () => {
@@ -67,7 +73,8 @@ describe('вход гостя', () => {
     expect(screen.getByRole('heading', { name: 'Вход' })).toBeInTheDocument()
     submitName('Анна')
 
-    expect(await screen.findByRole('heading', { name: 'Комната K7Q2PX' })).toBeInTheDocument()
+    // Страница комнаты: вход по REST прошёл, идёт подключение по WebSocket
+    expect(await screen.findByText('Подключение к комнате…')).toBeInTheDocument()
   })
 
   it('неверное имя: подсказка у поля, запроса нет', async () => {
